@@ -106,7 +106,7 @@ const forgotPassword = async (req, res) => {
   }
   const user = await USER.findOne({ email });
   if (!user) {
-    return res.status(404).json({ success: false, message: "Uer not found" });
+    return res.status(404).json({ success: false, message: "User not found" });
   }
   // save the rest token and its expiry in the db
   // generate reset token
@@ -157,7 +157,7 @@ const resetPassword = async (req, res) => {
 
   //verify the token
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.FRONTEND_URLJWT_SECRET);
     //find the user with the token
     const user = await USER.findOne({
       _id: decoded.id,
