@@ -79,7 +79,8 @@ const getUpcomingEvents = async (req, res) => {
     const currentDate = new Date();
     const upcomingEvents = await EVENT.find({ date: { $gte: currentDate } })
       .sort("date") //sort by date in asceding order
-      .limit(4); //limit the no of event to 4
+      .limit(4)
+      .populate("hostedBy", "fullName"); //limit the no of event to 4
 
     res.status(200).json({ success: true, events: upcomingEvents });
   } catch (error) {
