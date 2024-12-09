@@ -37,6 +37,12 @@ const userSchema = new Schema(
     },
     resetToken: String,
     resetTokenExpiry: Date,
+    yourevents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event", //References the Event modal
+      },
+    ],
   },
   { timestamps: true }
 );
@@ -48,4 +54,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);
